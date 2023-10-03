@@ -22,7 +22,7 @@ class CreateLooseDataService {
         // existing data and return the result to the client right away
 
         if (looseDataAlreadyExists) {
-            await looseDataRepository.update({ type: type}, {type: type, title: title, content: content, extraContent: content});
+            await looseDataRepository.update({ type: type}, {type: type, title: title, content: content, extraContent: extraContent});
             const resultEditedData = looseDataRepository.findOneBy({type});
 
             return resultEditedData;
