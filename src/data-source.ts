@@ -11,6 +11,6 @@ export const sqliteDataSource = new DataSource({
     
 });
 
-// You need this or you'll get a metadata error for you model
+// This is needed so we don't get a metadata error for our model
 
 sqliteDataSource.initialize();

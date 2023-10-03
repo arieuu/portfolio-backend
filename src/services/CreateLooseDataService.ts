@@ -1,7 +1,6 @@
 import { sqliteDataSource } from "../data-source";
 import { LooseData } from "../model/LooseData";
 
-
 interface ILooseData {
     type: string,
     title: string,
@@ -15,7 +14,21 @@ class CreateLooseDataService {
         
         const looseDataRepository = sqliteDataSource.getRepository(LooseData);
         
-        // Create new data instance with the provided data
+        // Checking if there's already data so we can just edit
+
+        const looseDataAlreadyExists = await looseDataRepository.findOneBy({type});
+
+        // If this type of loose data is already present in the database we just edit the
+        // existing data and return the result to the client right away
+
+        if (looseDataAlreadyExists) {
+            await looseDataRepository.update({ type: type}, {type: type, title: title, content: content, extraContent: content});
+            const resultEditedData = looseDataRepository.findOneBy({type});
+
+            return resultEditedData;
+        }
+
+        // Create new data instance with the provided data if it doesn't yet exist
 
         const looseData = new LooseData(type, title, content, extraContent);
 

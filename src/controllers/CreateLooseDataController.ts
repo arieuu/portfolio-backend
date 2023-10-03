@@ -13,6 +13,14 @@ class CreateLooseDataController {
                 content,
                 extraContent } = request.body
 
+        // Checking if we have all the data necessary
+
+        if(!type) throw new Error("Please choose a data title")
+        if(!title) throw new Error("Please insert a title")
+        if(!content) throw new Error("Please insert the content")
+
+        // We pass the data we have to our service and it will now what to do with it
+
         const looseData = await createLooseDataService.execute({
             type,
             title,
@@ -20,6 +28,8 @@ class CreateLooseDataController {
             extraContent
         });
         
+        // Then return everything to the client
+
         return response.json(looseData);
     }
 
