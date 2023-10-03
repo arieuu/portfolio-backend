@@ -14,6 +14,7 @@ app.get("/", (request: Request, response: Response) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 app.use(router) // The router that was exported in routes.ts
 
 // Return all errors to the API as a bad request instead of the console
@@ -29,6 +30,7 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
     });
 
 });
+
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");

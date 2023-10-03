@@ -12,9 +12,9 @@ class AuthenticateUserController {
 
         if(!username || !password) throw new Error("Please provide all necessary login data");
 
-        authenticateUseService.execute({ username, password })
+        const generatedToken = await authenticateUseService.execute({ username, password })
 
-        return response.json({username, password});
+        return response.json(generatedToken);
     }
 
 }
