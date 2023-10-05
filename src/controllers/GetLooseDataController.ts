@@ -5,12 +5,11 @@ import { GetLooseDataService } from "../services/GetLooseDataService";
 class GetLooseDataController {
 
     async handle(request: Request, response: Response) {
-        const { type } = request.body;
+        const type = request.params.type.split(":")[1];
+        
         const getLooseDataService = new GetLooseDataService();        
         
         // We check if we have info before calling our service
-
-        if(!type) throw new Error("Please choose a data type")
 
         const looseData = await getLooseDataService.execute(type);
 

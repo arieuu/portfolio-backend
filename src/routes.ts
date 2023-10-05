@@ -18,7 +18,7 @@ const createUserController = new CreateUserController();
 
 router.get("/api/v1/message", getMessage.handle);
 router.post("/api/v1/data", ensureAuthenticated, createLooseDataController.handle);
-router.get("/api/v1/data", getLooseDataController.handle);
+router.get("/api/v1/data?:type", getLooseDataController.handle);
 router.post("/api/v1/session", authenticateUserController.handle);
 router.post("/api/v1/user", createUserController.handle);
 

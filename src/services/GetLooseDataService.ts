@@ -6,9 +6,16 @@ class GetLooseDataService {
 
     async execute(type: string) {
 
-        // We locate the resource in the database and return it to the controller
-
         const looseDataRepository = sqliteDataSource.getRepository(LooseData);
+
+        // If the client doesn't specify a type for the loose data we return everything in the db
+        // We locate the resource or resources and return it to the controller
+
+        if(!type) {
+            const looseData = await looseDataRepository.find()
+            return looseData
+        }
+
         const looseData = looseDataRepository.findOneBy({ type });
 
         return looseData;
