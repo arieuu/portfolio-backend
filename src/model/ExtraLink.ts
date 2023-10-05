@@ -1,13 +1,17 @@
-import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import "reflect-metadata";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Post } from "./Post";
 
 
+@Entity("extra_links")
 class ExtraLink {
 
     @PrimaryColumn({name: "link_id"})
     readonly linkId: string;
 
-    @Column({name: "post_id"})
+    @ManyToOne(() => Post, (post) => post.postId)
+    @JoinColumn({name: "post_id"})
     postId: string;
 
     @Column()
