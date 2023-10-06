@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import { CreatePostService } from "../services/CreatePostService";
+import { EditPostService } from "../services/EditPostService";
 
 
-class CreatePostController {
+class EditPostController {
 
     async handle(request: Request, response: Response) {
-        const { title,
+        const { postId, 
+                title,
                 year,
                 description,
                 more,
@@ -24,16 +25,18 @@ class CreatePostController {
             for(let i = 0; i < extraLinks.length; i++) {
                 if(!extraLinks[i].link) throw new Error("Poorly formatted extralink, no link")
                 if(!extraLinks[i].linkText) throw new Error("Poorly formatted extralink, no link text")
+
+                extraLinks[i].postId = postId
             }
         }
 
-        const createPostService = new CreatePostService();
+        const editPostService = new EditPostService();
 
-        const createdPost = await createPostService.execute({title, year, description, more, link, tools, extraLinks});
+        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, extraLinks });
 
-        return response.json(createdPost);
+        return response.json(editedPost);
     }
 
 }
 
-export { CreatePostController };
+export { EditPostController };

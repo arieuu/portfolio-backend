@@ -10,7 +10,14 @@ class ExtraLink {
     @PrimaryColumn({name: "link_id"})
     readonly linkId: string;
 
-    @ManyToOne(() => Post, (post) => post.postId)
+    @ManyToOne(() => Post, (post) => post.postId, {
+
+        // We need this or the update will go bad for this relation
+        
+        onDelete: "CASCADE",
+        onUpdate: "RESTRICT",
+        orphanedRowAction: "delete"
+    })
     @JoinColumn({name: "post_id"})
     postId: string;
 

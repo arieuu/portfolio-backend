@@ -6,6 +6,7 @@ import { AuthenticateUserController } from "./controllers/AuthenticateUserContro
 import { CreateUserController } from "./controllers/CreateUserController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { CreatePostController } from "./controllers/CreatePostController";
+import { EditPostController } from "./controllers/EditPostController";
 
 const router = Router();
 
@@ -15,6 +16,7 @@ const getLooseDataController = new GetLooseDataController();
 const authenticateUserController = new AuthenticateUserController();
 const createUserController = new CreateUserController();
 const createPostController = new CreatePostController();
+const editPostController = new EditPostController();
 
 // Routes
 
@@ -24,5 +26,6 @@ router.get("/api/v1/data?:type", getLooseDataController.handle);
 router.post("/api/v1/session", authenticateUserController.handle);
 router.post("/api/v1/user", createUserController.handle);
 router.post("/api/v1/post", createPostController.handle);
+router.put("/api/v1/post", editPostController.handle);
 
 export { router };

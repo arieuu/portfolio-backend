@@ -31,7 +31,7 @@ class Post {
     /** This propriety is not defined in the database, only in this class.
         It will hold the relation instances */
 
-    @OneToMany(() => ExtraLink, (extraLink) => extraLink.postId, { cascade: true })
+    @OneToMany(() => ExtraLink, (extraLink) => extraLink.postId, { cascade: true, eager: true })
     extraLinks: ExtraLink[];
 
     @CreateDateColumn({name: "created_at"})

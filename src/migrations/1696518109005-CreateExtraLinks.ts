@@ -34,7 +34,7 @@ export class CreateExtraLinks1696518109005 implements MigrationInterface {
                         default: "now()"
                     },
                     {
-                        name: "udated_at",
+                        name: "updated_at",
                         type: "timestamp",
                         default: "now()"
                     }
