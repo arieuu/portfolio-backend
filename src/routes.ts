@@ -7,6 +7,7 @@ import { CreateUserController } from "./controllers/CreateUserController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { CreatePostController } from "./controllers/CreatePostController";
 import { EditPostController } from "./controllers/EditPostController";
+import { DeletePostController } from "./controllers/DeletePostController";
 
 const router = Router();
 
@@ -17,15 +18,17 @@ const authenticateUserController = new AuthenticateUserController();
 const createUserController = new CreateUserController();
 const createPostController = new CreatePostController();
 const editPostController = new EditPostController();
+const deletePostController = new DeletePostController();
 
 // Routes
 
 router.get("/api/v1/message", getMessage.handle);
-router.post("/api/v1/data", ensureAuthenticated, createLooseDataController.handle);
+router.post("/api/v1/data", createLooseDataController.handle);
 router.get("/api/v1/data?:type", getLooseDataController.handle);
 router.post("/api/v1/session", authenticateUserController.handle);
 router.post("/api/v1/user", createUserController.handle);
 router.post("/api/v1/post", createPostController.handle);
 router.put("/api/v1/post", editPostController.handle);
+router.delete("/api/v1/post:postId", deletePostController.handle);
 
 export { router };

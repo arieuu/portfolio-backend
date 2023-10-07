@@ -64,7 +64,6 @@ class EditPostService {
 
         for(let i = 0; i < deadLinks.length; i++) {
             await extraLinksRepository.delete(deadLinks[i]);
-            console.log("DELETED")
         }
 
         // Only after everything is done we return the resulting object to the user
