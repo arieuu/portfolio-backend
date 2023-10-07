@@ -46,6 +46,8 @@ class EditPostService {
 
         const updatedPost = await postRepository.preload(receivedPost);
 
+        if(!updatedPost) throw new Error("No such post");
+
         const savedPost = await postRepository.save(updatedPost)
 
         /*
