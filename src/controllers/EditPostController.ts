@@ -12,8 +12,16 @@ class EditPostController {
                 more,
                 link,
                 tools,
+                isFirstPage,
                 extraLinks
         } = request.body
+
+        // Convert the value from string to boolean
+
+        const booleanConvert = isFirstPage === "true";
+        
+        const projectImage = request.file;
+        const imageUrl = projectImage.path;
 
         // Check for the required data before proceeding
 
@@ -21,18 +29,19 @@ class EditPostController {
 
         // We go through each individual extra link and check if we have everything we need
 
-        if(extraLinks) {
-            for(let i = 0; i < extraLinks.length; i++) {
-                if(!extraLinks[i].link) throw new Error("Poorly formatted extralink, no link")
-                if(!extraLinks[i].linkText) throw new Error("Poorly formatted extralink, no link text")
+        const parsedExtraLinks = JSON.parse(extraLinks); // Parse the object from string coming from the multipart to json
 
-                extraLinks[i].postId = postId
+        if(extraLinks) {
+            for(let i = 0; i < parsedExtraLinks.length; i++) {
+                if(!parsedExtraLinks[i].link) throw new Error("Poorly formatted extralink, no link")
+                if(!parsedExtraLinks[i].linkText) throw new Error("Poorly formatted extralink, no link text")
             }
         }
 
+
         const editPostService = new EditPostService();
 
-        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, extraLinks });
+        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, imageUrl, extraLinks: parsedExtraLinks });
 
         return response.json(editedPost);
     }

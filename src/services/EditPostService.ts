@@ -1,6 +1,7 @@
 import { sqliteDataSource } from "../data-source";
 import { ExtraLink } from "../model/ExtraLink";
 import { Post } from "../model/Post";
+import { unlink } from "node:fs/promises";
 
 interface IPost {
     postId: string;
@@ -10,12 +11,14 @@ interface IPost {
     more: string,
     link: string,
     tools: string,
+    isFirstPage: boolean,
+    imageUrl: string,
     extraLinks?: ExtraLink[]
 }
 
 class EditPostService {
 
-    async execute({postId, title, year, description, more, link, tools, extraLinks }: IPost) {
+    async execute({postId, title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks }: IPost) {
 
         const postRepository = sqliteDataSource.getRepository(Post);
         const extraLinksRepository = sqliteDataSource.getRepository(ExtraLink);
@@ -30,6 +33,8 @@ class EditPostService {
             more: more,
             link: link,
             tools: tools,
+            isFirstPage: isFirstPage,
+            imageUrl: imageUrl,
 
             /* one to many relation, we use eager in Post class to go deeper
             * We don't set a value for it so it doesn't get replaced by preload
@@ -44,6 +49,7 @@ class EditPostService {
          * with the fields we pass it, the rest will come as is
          */
 
+        const originalPost = await postRepository.findOne({where: {postId: postId}})
         const updatedPost = await postRepository.preload(receivedPost);
 
         if(!updatedPost) throw new Error("No such post");
@@ -66,6 +72,16 @@ class EditPostService {
 
         for(let i = 0; i < deadLinks.length; i++) {
             await extraLinksRepository.delete(deadLinks[i]);
+        }
+
+        // After deleting in the database we delete the old uploaded image
+
+        try {
+         
+            await unlink(originalPost.imageUrl);
+
+        } catch(Err) {
+            // If the image can't be deleted just move on
         }
 
         // Only after everything is done we return the resulting object to the user
