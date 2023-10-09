@@ -44,6 +44,14 @@ export class CreatePosts1696517075479 implements MigrationInterface {
                         isNullable: true
                     },
                     {
+                        name: "image_url",
+                        type: "varchar"
+                    },
+                    {
+                        name: "is_first_page",
+                        type: "boolean"
+                    },
+                    {
                         name: "created_at",
                         type: "timestamp",
                         default: "now()"

@@ -10,17 +10,19 @@ interface IPost {
     more: string,
     link: string,
     tools: string,
+    isFirstPage: boolean,
+    imageUrl: string,
     extraLinks?: ExtraLink[]
 }
 
 
 class CreatePostService {
 
-    async execute({ title, year, description, more, link, tools, extraLinks }: IPost) {
+    async execute({ title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks }: IPost) {
 
         const postRepository = sqliteDataSource.getRepository(Post);
 
-        const post = new Post(title, year, description, more, link, tools, extraLinks);
+        const post = new Post(title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks);
 
         await postRepository.save(post);
 
