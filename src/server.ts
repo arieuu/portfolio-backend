@@ -13,7 +13,7 @@ app.get("/", (request: Request, response: Response) => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use("/uploads/", express.static("uploads"));
 
 app.use(router) // The router that was exported in routes.ts
 
