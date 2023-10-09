@@ -1,6 +1,6 @@
 import { sqliteDataSource } from "../data-source";
 import { Post } from "../model/Post";
-
+import { unlink } from "node:fs/promises"
 
 class DeletePostService {
 
@@ -17,9 +17,17 @@ class DeletePostService {
 
         const post = await postRepository.findOne({where: {postId: postId}});
 
-        if(!post) throw new Error("The required post does not exist");
+        if(!post) throw new Error("This required post does not exist");
 
         await postRepository.delete({ postId: postId });
+
+        try {
+         
+        await unlink(post.imageUrl);
+
+        } catch(Err) {
+            // If the image can't be deleted just move on
+        }
 
         return post;
     }
