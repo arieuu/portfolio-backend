@@ -15,15 +15,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/uploads/", express.static("uploads"));
 
-app.use(router) // The router that was exported in routes.ts
+// The router that was exported in routes.ts
+
+app.use(router) 
 
 // Return all errors to the API as a bad request instead of the console
+
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
     if(err instanceof Error) {
         return response.status(400).json({Error: err.message});
     }
 
     // In case something else goes terribly wrong return an internal server error
+
     return response.status(500).json({
         status: "Server error",
         message: "Internal server Error"

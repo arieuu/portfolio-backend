@@ -34,6 +34,9 @@ class Post {
     @Column({"name": "is_first_page"})
     isFirstPage: boolean;
 
+    @Column({"name": "is_hidden"})
+    isHidden: boolean;
+
     /** This propriety is not defined in the database, only in this class.
         It will hold the relation instances */
 
@@ -46,7 +49,7 @@ class Post {
     @UpdateDateColumn({name: "updated_at"})
     updatedAt: Date;
 
-    constructor(title: string, year: string, description: string, more: string, link: string, tools: string, isFirstPage: boolean, imageUrl: string, extraLinks?: ExtraLink[]) {
+    constructor(title: string, year: string, description: string, more: string, link: string, tools: string, isFirstPage: boolean, isHidden: boolean, imageUrl: string, extraLinks?: ExtraLink[]) {
         this.postId = uuid();
         this.title = title;
         this.year = year;
@@ -55,6 +58,7 @@ class Post {
         this.link = link;
         this.tools = tools;
         this.isFirstPage = isFirstPage;
+        this.isHidden = isHidden;
         this.imageUrl = imageUrl;
 
         if(extraLinks) {

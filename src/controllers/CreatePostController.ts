@@ -11,19 +11,21 @@ class CreatePostController {
                 link,
                 tools,
                 isFirstPage,
+                isHidden,
                 extraLinks
         } = request.body
         
-        // Convert the value from string to boolean
+        // Convert the values from string to boolean
 
         const booleanConvert = isFirstPage === "true";
+        const booleanHidden = isHidden == "true";
         
         const projectImage = request.file;
         const imageUrl = projectImage.path;
 
         // Check for the required data before proceeding
 
-        if(!title || !year || !description || !link || !isFirstPage || !projectImage) throw new Error("Please insert required data");
+        if(!title || !year || !description || !link || !isFirstPage || !isHidden || !projectImage) throw new Error("Please insert required data");
 
         // We go through each individual extra link and check if we have everything we need
 
@@ -38,7 +40,7 @@ class CreatePostController {
 
         const createPostService = new CreatePostService();
 
-        const createdPost = await createPostService.execute({title, year, description, more, link, tools, isFirstPage: booleanConvert, imageUrl, extraLinks: parsedExtraLinks});
+        const createdPost = await createPostService.execute({title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: parsedExtraLinks});
 
         return response.json(createdPost);
     }

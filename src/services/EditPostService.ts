@@ -12,13 +12,14 @@ interface IPost {
     link: string,
     tools: string,
     isFirstPage: boolean,
+    isHidden: boolean,
     imageUrl: string,
     extraLinks?: ExtraLink[]
 }
 
 class EditPostService {
 
-    async execute({postId, title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks }: IPost) {
+    async execute({postId, title, year, description, more, link, tools, isFirstPage, isHidden, imageUrl, extraLinks }: IPost) {
 
         const postRepository = sqliteDataSource.getRepository(Post);
         const extraLinksRepository = sqliteDataSource.getRepository(ExtraLink);
@@ -34,6 +35,7 @@ class EditPostService {
             link: link,
             tools: tools,
             isFirstPage: isFirstPage,
+            isHidden: isHidden,
             imageUrl: imageUrl,
 
             /* one to many relation, we use eager in Post class to go deeper

@@ -11,6 +11,7 @@ interface IPost {
     link: string,
     tools: string,
     isFirstPage: boolean,
+    isHidden: boolean,
     imageUrl: string,
     extraLinks?: ExtraLink[]
 }
@@ -18,11 +19,11 @@ interface IPost {
 
 class CreatePostService {
 
-    async execute({ title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks }: IPost) {
+    async execute({ title, year, description, more, link, tools, isFirstPage, isHidden, imageUrl, extraLinks }: IPost) {
 
         const postRepository = sqliteDataSource.getRepository(Post);
 
-        const post = new Post(title, year, description, more, link, tools, isFirstPage, imageUrl, extraLinks);
+        const post = new Post(title, year, description, more, link, tools, isFirstPage, isHidden, imageUrl, extraLinks);
 
         await postRepository.save(post);
 

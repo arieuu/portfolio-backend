@@ -52,6 +52,12 @@ export class CreatePosts1696517075479 implements MigrationInterface {
                         type: "boolean"
                     },
                     {
+                        name: "is_hidden",
+                        type: "boolean",
+                        isNullable: false,
+                        default: false
+                    },
+                    {
                         name: "created_at",
                         type: "timestamp",
                         default: "now()"

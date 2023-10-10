@@ -13,19 +13,21 @@ class EditPostController {
                 link,
                 tools,
                 isFirstPage,
+                isHidden,
                 extraLinks
         } = request.body
 
-        // Convert the value from string to boolean
+        // Convert values from string to boolean
 
         const booleanConvert = isFirstPage === "true";
+        const booleanHidden = isHidden === "true";
         
         const projectImage = request.file;
         const imageUrl = projectImage.path;
 
         // Check for the required data before proceeding
 
-        if(!title || !year || !description || !link) throw new Error("Please insert required data");
+        if(!title || !year || !description || !link || !isHidden) throw new Error("Please insert required data");
 
         // We go through each individual extra link and check if we have everything we need
 
@@ -40,8 +42,7 @@ class EditPostController {
 
 
         const editPostService = new EditPostService();
-
-        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, imageUrl, extraLinks: parsedExtraLinks });
+        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: parsedExtraLinks });
 
         return response.json(editedPost);
     }
