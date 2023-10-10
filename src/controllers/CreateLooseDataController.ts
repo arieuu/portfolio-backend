@@ -15,9 +15,9 @@ class CreateLooseDataController {
 
         // Checking if we have all the data necessary
 
-        if(!type) throw new Error("Please choose a data title")
-        if(!title) throw new Error("Please insert a title")
-        if(!content) throw new Error("Please insert the content")
+        if (!type) throw new Error("Please choose a data title")
+        if (!title) throw new Error("Please insert a title")
+        if (!content) throw new Error("Please insert the content")
 
         // We pass the data we have to our service and it will now what to do with it
 

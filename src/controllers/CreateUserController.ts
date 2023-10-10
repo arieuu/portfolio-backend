@@ -10,7 +10,7 @@ class CreateUserController {
 
         // Checking values
 
-        if(!username || !password) throw new Error("Please provide necessary user information");
+        if (!username || !password) throw new Error("Please provide necessary user information");
 
         const createdUser = await createUserService.execute({ username, password });
 

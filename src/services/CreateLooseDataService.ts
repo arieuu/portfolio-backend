@@ -18,8 +18,10 @@ class CreateLooseDataService {
 
         const looseDataAlreadyExists = await looseDataRepository.findOneBy({type});
 
-        // If this type of loose data is already present in the database we just edit the
-        // existing data and return the result to the client right away
+        /*
+         * If this type of loose data is already present in the database we just edit the
+         * existing data and return the result to the client right away
+         */
 
         if (looseDataAlreadyExists) {
             await looseDataRepository.update({ type: type}, {type: type, title: title, content: content, extraContent: extraContent});

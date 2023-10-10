@@ -6,7 +6,6 @@ class GetLooseDataController {
 
     async handle(request: Request, response: Response) {
         const type = request.params.type.split(":")[1];
-        
         const getLooseDataService = new GetLooseDataService();        
         
         // We check if we have info before calling our service

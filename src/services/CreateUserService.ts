@@ -10,12 +10,13 @@ interface IUser{
 class CreateUserService {
 
     async execute({ username, password }: IUser) {
+
         const userRepository = sqliteDataSource.getRepository(User);
         const users = await userRepository.find();
 
         // We check if there are any users in the database, if so we don't create any
 
-        if(users.length > 0) throw new Error("Can't register any more users");
+        if (users.length > 0) throw new Error("Can't register any more users");
 
         // We hash the given password, create a new User instance and persist it to the DB
 

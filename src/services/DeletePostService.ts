@@ -17,7 +17,7 @@ class DeletePostService {
 
         const post = await postRepository.findOne({where: {postId: postId}});
 
-        if(!post) throw new Error("This post does not exist");
+        if (!post) throw new Error("This post does not exist");
 
         await postRepository.delete({ postId: postId });
 

@@ -16,7 +16,6 @@ interface IPost {
     extraLinks?: ExtraLink[]
 }
 
-
 class CreatePostService {
 
     async execute({ title, year, description, more, link, tools, isFirstPage, isHidden, imageUrl, extraLinks }: IPost) {

@@ -18,6 +18,7 @@ class ExtraLink {
         onUpdate: "RESTRICT",
         orphanedRowAction: "delete"
     })
+
     @JoinColumn({name: "post_id"})
     postId: string;
 

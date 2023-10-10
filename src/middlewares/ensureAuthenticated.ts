@@ -20,10 +20,13 @@ function ensureAuthenticated(request: Request, response: Response, next: NextFun
         const decoded = verify(tokenString, "0cf0607937013cb58d79a7d3c59d4e11") as IPayload;
 
         // We retrieve the userId that we saved on subject uppon authentication
+
         const subject = decoded.sub;
 
-        // Saving the content of subject(the user id) to the body of every request this user does while authenticated
-        // This is a custom field I created by using declaration merging. (see src/@types/express)
+        /* 
+         * Saving the content of subject(the user id) to the body of every request this user does while authenticated
+         * This is a custom field I created by using declaration merging. (see src/@types/express) 
+        */
 
         request.authUserId = subject; // Authenticated user id
 
@@ -42,8 +45,10 @@ function ensureAuthenticated(request: Request, response: Response, next: NextFun
         }
     });
 
-    if(!user) {
+    if (!user) {
+
         // if there is no user for that id we stop the process
+
         return response.status(401).end(); // forbidden
     }
 

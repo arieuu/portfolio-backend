@@ -1,3 +1,4 @@
+import { response } from "express";
 import { sqliteDataSource } from "../data-source";
 import { Post } from "../model/Post";
 
@@ -8,12 +9,14 @@ class GetPostService {
 
         const postRepository = sqliteDataSource.getRepository(Post);
 
-        if(!postId) {
+        if (!postId) {
             const posts = await postRepository.find();
             return posts;
         }
 
-        const post = postRepository.findOneBy({ postId });
+        const post = await postRepository.findOneBy({ postId });
+
+        if(!post || post == null) return response.status(404);
 
         return post; 
     }

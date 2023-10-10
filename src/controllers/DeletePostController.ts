@@ -10,7 +10,7 @@ class DeletePostController {
 
         const postId = (request.params.postId).split(":")[1];
 
-        if(!postId) throw new Error("Please provide a post id");
+        if (!postId) throw new Error("Please provide a post id");
 
         const deletePostService = new DeletePostService();
 

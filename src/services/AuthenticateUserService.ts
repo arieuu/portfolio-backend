@@ -15,19 +15,22 @@ class AuthenticateUserService {
         const userRepository = sqliteDataSource.getRepository(User);
         const user = await userRepository.findOneBy({username});
 
-        if(!user) throw new Error("Username/password incorrect");
+        if (!user) throw new Error("Username/password incorrect");
 
         const passwordMatch = await compare(password, user.password);
 
-        if(!passwordMatch) throw new Error("Username/password incorrect");
+        if (!passwordMatch) throw new Error("Username/password incorrect");
 
-        // Past here it means the user has succesfully authenticated
-        // We will now give them a unique token (using jsonwebtoken)
+        /* 
+         * Past here it means the user has succesfully authenticated
+         * We will now give them a unique token (using jsonwebtoken)
+         */
 
         const token = sign(
            {
             login: user.username
            }, "0cf0607937013cb58d79a7d3c59d4e11", // Private key, a secretword. Here I hashed it
+            
            {
             subject: user.username,
             expiresIn: "1d" // This token will expire in 1 day

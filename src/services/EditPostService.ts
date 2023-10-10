@@ -54,7 +54,8 @@ class EditPostService {
         const originalPost = await postRepository.findOne({where: {postId: postId}})
         const updatedPost = await postRepository.preload(receivedPost);
 
-        if(!updatedPost) throw new Error("No such post");
+        if (!updatedPost) throw new Error("No such post");
+
 
         const savedPost = await postRepository.save(updatedPost)
 
@@ -72,7 +73,7 @@ class EditPostService {
                 }
         });
 
-        for(let i = 0; i < deadLinks.length; i++) {
+        for (let i = 0; i < deadLinks.length; i++) {
             await extraLinksRepository.delete(deadLinks[i]);
         }
 

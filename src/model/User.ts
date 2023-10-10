@@ -17,7 +17,7 @@ class User {
         this.username = username;
         this.password = password;
 
-        if(!this.userId) this.userId = uuid();
+        if (!this.userId) this.userId = uuid();
     }
 
 }

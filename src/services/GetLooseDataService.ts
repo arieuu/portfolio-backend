@@ -8,10 +8,12 @@ class GetLooseDataService {
 
         const looseDataRepository = sqliteDataSource.getRepository(LooseData);
 
-        // If the client doesn't specify a type for the loose data we return everything in the db
-        // We locate the resource or resources and return it to the controller
+        /** 
+         * If the client doesn't specify a type for the loose data we return everything in the db
+         * We locate the resource or resources and return it to the controller
+         */
 
-        if(!type) {
+        if (!type) {
             const looseData = await looseDataRepository.find()
             return looseData
         }

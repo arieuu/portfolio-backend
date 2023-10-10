@@ -37,8 +37,10 @@ class Post {
     @Column({"name": "is_hidden"})
     isHidden: boolean;
 
-    /** This propriety is not defined in the database, only in this class.
-        It will hold the relation instances */
+    /* 
+     * This propriety is not defined in the database, only in this class.
+     * It will hold the relation instances 
+    */
 
     @OneToMany(() => ExtraLink, (extraLink) => extraLink.postId, { cascade: true, eager: true })
     extraLinks: ExtraLink[];
@@ -61,8 +63,9 @@ class Post {
         this.isHidden = isHidden;
         this.imageUrl = imageUrl;
 
-        if(extraLinks) {
+        if (extraLinks) {
             this.extraLinks = [];
+
             for (let i = 0; i < extraLinks.length; i++) {
                 this.extraLinks.push(new ExtraLink(this.postId, extraLinks[i].link, extraLinks[i].linkText));
             }
