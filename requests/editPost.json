@@ -1,0 +1,26 @@
+// PUT localhost:3000/api/v1/post
+
+// Multipart form
+
+{
+    "postId": "postuuid",
+	"title": "test",
+	"year": "2023",
+	"description": "This is a project",
+	"more": "Still a project",
+	"link": "localhost:3000/api/v1/user",
+	"tools": "js ts tailwindcss",
+    "isFirstPage": true,
+    "isHidden": false,
+	"extraLinks": [
+		{
+			"link": "localhost:3000/api/v1/user",
+			"linkText": "test 1"
+		},
+		{
+			"link": "localhost:3000/api/v1/user",
+			"linkText": "test 2"
+		}
+	],
+    "projectImage": ["imageFile"]
+}

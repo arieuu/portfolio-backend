@@ -1,0 +1,6 @@
+// POST localhost:3000/api/v1/session
+
+{
+	"username": "arielcarvalho",
+	"password": "Ajacarvalho@12"
+}

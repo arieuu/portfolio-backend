@@ -1,0 +1,8 @@
+// POST localhost:3000/api/v1/data
+
+{
+	"type": "header",
+	"title": "footer 222",
+	"content": "I just edited this in the other route",
+	"extraContent": "Bet you didn't expect it, huh?!"
+}
