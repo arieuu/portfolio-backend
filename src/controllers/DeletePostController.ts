@@ -8,7 +8,7 @@ class DeletePostController {
 
         // Using param for DELETE verb because sending data in request body caused issues
 
-        const postId = (request.params.postId).split(":")[1];
+        const postId = (request.params.postId);
 
         if (!postId) throw new Error("Please provide a post id");
 

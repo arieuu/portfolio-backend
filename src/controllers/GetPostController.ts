@@ -5,7 +5,8 @@ import { GetPostService } from "../services/GetPostService";
 class GetPostController {
 
     async handle(request: Request, response: Response) {
-        const postId = request.params.postId.split(":")[1];
+        const postId = request.params.postId;
+
         const getPostService = new GetPostService();
 
         const result = await getPostService.execute(postId);

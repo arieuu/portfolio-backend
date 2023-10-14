@@ -1,3 +1,4 @@
+import { response } from "express";
 import { sqliteDataSource } from "../data-source";
 import { LooseData } from "../model/LooseData";
 
@@ -18,7 +19,9 @@ class GetLooseDataService {
             return looseData
         }
 
-        const looseData = looseDataRepository.findOneBy({ type });
+        const looseData = await looseDataRepository.findOneBy({ type });
+
+        if(!looseData) return response.status(404)
 
         return looseData;
     }

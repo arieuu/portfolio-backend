@@ -47,8 +47,8 @@ router.post("/api/v1/session", authenticateUserController.handle);
 router.post("/api/v1/user", createUserController.handle);
 router.post("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), createPostController.handle);
 router.put("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), editPostController.handle);
-router.delete("/api/v1/post:postId", ensureAuthenticated, deletePostController.handle);
-router.get("/api/v1/data?:type", getLooseDataController.handle);
-router.get("/api/v1/post?:postId", getPostController.handle);
+router.delete("/api/v1/post/:postId", ensureAuthenticated, deletePostController.handle);
+router.get("/api/v1/data/:type?", getLooseDataController.handle);
+router.get("/api/v1/post/:postId?", getPostController.handle);
 
 export { router };

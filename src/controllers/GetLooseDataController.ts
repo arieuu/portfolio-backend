@@ -5,7 +5,8 @@ import { GetLooseDataService } from "../services/GetLooseDataService";
 class GetLooseDataController {
 
     async handle(request: Request, response: Response) {
-        const type = request.params.type.split(":")[1];
+        const type = request.params.type;
+
         const getLooseDataService = new GetLooseDataService();        
         
         // We check if we have info before calling our service
