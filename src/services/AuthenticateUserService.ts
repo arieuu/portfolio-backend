@@ -2,6 +2,7 @@ import { compare } from "bcryptjs";
 import { sqliteDataSource } from "../data-source";
 import { User } from "../model/User";
 import { sign } from "jsonwebtoken";
+import { response } from "express";
 
 interface IUserLogin {
     username: string,
@@ -15,8 +16,8 @@ class AuthenticateUserService {
         const userRepository = sqliteDataSource.getRepository(User);
         const user = await userRepository.findOneBy({username});
 
-        if (!user) throw new Error("Username/password incorrect");
-
+        // if (!user) throw new Error("Username/password incorrect");
+        if(!user) return response.status(401)
         const passwordMatch = await compare(password, user.password);
 
         if (!passwordMatch) throw new Error("Username/password incorrect");
@@ -36,6 +37,8 @@ class AuthenticateUserService {
             expiresIn: "1d" // This token will expire in 1 day
            }
         );
+
+        response.status(200);
 
         return token;
 

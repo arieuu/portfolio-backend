@@ -3,12 +3,15 @@ import express, { NextFunction, Request, Response } from "express";
 import { router } from "./routes";
 import bodyParser from "body-parser";
 
+const cors = require("cors");
+
 const app = express();
 
 app.get("/", (request: Request, response: Response) => {
     response.send("portfolio");
 });
 
+app.use(cors());
 // Using this package so we can read the request body
 
 app.use(bodyParser.json());
