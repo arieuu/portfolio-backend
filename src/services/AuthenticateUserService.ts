@@ -18,9 +18,10 @@ class AuthenticateUserService {
 
         // if (!user) throw new Error("Username/password incorrect");
         if(!user) return response.status(401)
+
         const passwordMatch = await compare(password, user.password);
 
-        if (!passwordMatch) throw new Error("Username/password incorrect");
+        if (!passwordMatch) return response.status(401);
 
         /* 
          * Past here it means the user has succesfully authenticated
