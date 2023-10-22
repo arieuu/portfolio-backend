@@ -10,6 +10,7 @@ import { DeletePostController } from "./controllers/DeletePostController";
 import { GetPostController } from "./controllers/GetPostController";
 import multer from "multer";
 import CheckAuthenticationController from "./controllers/CheckAuthenticationController";
+import { AlterPostController } from "./controllers/AlterPostController";
 
 /**
  * Set up a more intrinsicate binary storage config instead of just passing the "dest" propriety
@@ -38,6 +39,7 @@ const authenticateUserController = new AuthenticateUserController();
 const createUserController = new CreateUserController();
 const createPostController = new CreatePostController();
 const editPostController = new EditPostController();
+const alterPostController = new AlterPostController();
 const deletePostController = new DeletePostController();
 const getPostController = new GetPostController();
 const checkAuthenticationController = new CheckAuthenticationController();
@@ -50,6 +52,7 @@ router.get("/api/v1/session", ensureAuthenticated, checkAuthenticationController
 router.post("/api/v1/user", createUserController.handle);
 router.post("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), createPostController.handle);
 router.put("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), editPostController.handle);
+router.put("/api/v1/post/alter", ensureAuthenticated, alterPostController.handle);
 router.delete("/api/v1/post/:postId", ensureAuthenticated, deletePostController.handle);
 router.get("/api/v1/data/:type?", getLooseDataController.handle);
 router.get("/api/v1/post/:postId?", getPostController.handle);
