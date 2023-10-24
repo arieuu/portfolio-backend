@@ -13,8 +13,6 @@ class AlterPostController {
 
         if (isFirstPage == null || isHidden == null) {
             
-            // Delete the uploaded image
-
             throw new Error("Please insert required data");
         }
         
