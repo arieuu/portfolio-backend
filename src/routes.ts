@@ -50,7 +50,7 @@ router.post("/api/v1/data", ensureAuthenticated, createLooseDataController.handl
 router.post("/api/v1/session", authenticateUserController.handle);
 router.get("/api/v1/session", ensureAuthenticated, checkAuthenticationController.handle);
 router.post("/api/v1/user", createUserController.handle);
-router.post("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), createPostController.handle);
+router.post("/api/v1/post", ensureAuthenticated, upload.single("projectImage"/** same name as file input */), createPostController.handle);
 router.put("/api/v1/post", ensureAuthenticated, upload.single("projectImage"), editPostController.handle);
 router.put("/api/v1/post/alter", ensureAuthenticated, alterPostController.handle);
 router.delete("/api/v1/post/:postId", ensureAuthenticated, deletePostController.handle);

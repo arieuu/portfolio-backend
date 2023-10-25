@@ -17,7 +17,7 @@ class CreatePostController {
         } = request.body
         
         // Convert the values from string to boolean
-
+        
         const booleanConvert = isFirstPage === "true";
         const booleanHidden = isHidden == "true";
         
@@ -43,13 +43,13 @@ class CreatePostController {
 
         // We go through each individual extra link and check if we have everything we need
 
-        const parsedExtraLinks = JSON.parse(extraLinks); // Parse the object from string coming from the multipart to json
+        extraLinks; // Parse the object from string coming from the multipart to json
 
         if (extraLinks) {
 
-            for(let i = 0; i < parsedExtraLinks.length; i++) {
+            for(let i = 0; i < extraLinks.length; i++) {
 
-                if (!parsedExtraLinks[i].link) {
+                if (!extraLinks[i].link) {
                     
                     // Delete uploaded image
 
@@ -64,7 +64,7 @@ class CreatePostController {
                     throw new Error("Poorly formatted extralink, no link")
                 }
 
-                if (!parsedExtraLinks[i].linkText) {
+                if (!extraLinks[i].linkText) {
                     
                     // Delete the uploaded image
 
@@ -83,7 +83,7 @@ class CreatePostController {
 
         const createPostService = new CreatePostService();
 
-        const createdPost = await createPostService.execute({title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: parsedExtraLinks});
+        const createdPost = await createPostService.execute({title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: extraLinks});
 
         return response.json(createdPost);
     }
