@@ -11,6 +11,8 @@ class GetPostController {
 
         const result = await getPostService.execute(postId);
 
+        response.status(200) // Set the status to ok when post is found
+
         return response.json(result);
     }
 

@@ -85,6 +85,8 @@ class CreatePostController {
 
         const createdPost = await createPostService.execute({title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: extraLinks});
 
+        response.status(200); // Ok
+
         return response.json(createdPost);
     }
 

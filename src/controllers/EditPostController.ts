@@ -44,13 +44,13 @@ class EditPostController {
 
         // We go through each individual extra link and check if we have everything we need
 
-        const parsedExtraLinks = JSON.parse(extraLinks); // Parse the object from string coming from the multipart to json
+        // const parsedExtraLinks = JSON.parse(extraLinks); // Parse the object from string coming from the multipart to json
 
         if (extraLinks) {
 
-            for(let i = 0; i < parsedExtraLinks.length; i++) {
+            for(let i = 0; i < extraLinks.length; i++) {
 
-                if (!parsedExtraLinks[i].link) { 
+                if (!extraLinks[i].link) { 
 
                     // Delete the uploaded image
 
@@ -65,7 +65,7 @@ class EditPostController {
                     throw new Error("Poorly formatted extralink, no link")
                 }
 
-                if (!parsedExtraLinks[i].linkText) { 
+                if (!extraLinks[i].linkText) { 
 
                     // Delete the uploaded image
 
@@ -84,8 +84,9 @@ class EditPostController {
 
 
         const editPostService = new EditPostService();
-        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: parsedExtraLinks });
+        const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: extraLinks});
 
+        response.status(200); // Ok
         return response.json(editedPost);
     }
 
