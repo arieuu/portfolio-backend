@@ -87,6 +87,7 @@ class EditPostController {
         const editedPost = await editPostService.execute({ postId, title, year, description, more, link, tools, isFirstPage: booleanConvert, isHidden: booleanHidden, imageUrl, extraLinks: extraLinks});
 
         response.status(200); // Ok
+
         return response.json(editedPost);
     }
 

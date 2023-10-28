@@ -16,6 +16,8 @@ class DeletePostController {
 
         const deletedPost = await deletePostService.execute(postId);
 
+        response.status(200); // Ok
+
         return response.json(deletedPost);
 
     }

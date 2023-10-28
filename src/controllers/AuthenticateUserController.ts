@@ -15,6 +15,8 @@ class AuthenticateUserController {
 
         const generatedToken = await authenticateUseService.execute({ username, password })
 
+        response.status(200); // Ok
+
         return response.json(generatedToken);
     }
 

@@ -19,6 +19,8 @@ class AlterPostController {
         const alterPostService = new AlterPostService();
         const editedPost = await alterPostService.execute({ postId,  isFirstPage: isFirstPage, isHidden: isHidden});
 
+        response.status(200); // Ok
+
         return response.json(editedPost);
     }
 

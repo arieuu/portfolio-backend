@@ -28,7 +28,9 @@ class CreateLooseDataController {
             extraContent
         });
         
-        // Then return everything to the client
+        // Then set response status to Ok and return everything to the client
+
+        response.status(200); // Ok
 
         return response.json(looseData);
     }

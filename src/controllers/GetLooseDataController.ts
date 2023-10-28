@@ -13,6 +13,8 @@ class GetLooseDataController {
 
         const looseData = await getLooseDataService.execute(type);
 
+        response.status(200); // Ok
+
         return response.json(looseData);
     }
 
