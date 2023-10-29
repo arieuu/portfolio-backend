@@ -46,7 +46,7 @@ class EditPostController {
 
         // const parsedExtraLinks = JSON.parse(extraLinks); // Parse the object from string coming from the multipart to json
 
-        if (extraLinks) {
+        if (extraLinks && extraLinks.length > 0) {
 
             for(let i = 0; i < extraLinks.length; i++) {
 

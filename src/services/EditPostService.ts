@@ -14,7 +14,7 @@ interface IPost {
     isFirstPage: boolean,
     isHidden: boolean,
     imageUrl: string,
-    extraLinks?: ExtraLink[]
+    extraLinks: ExtraLink[]
 }
 
 class EditPostService {
@@ -45,6 +45,10 @@ class EditPostService {
             extraLinks
             
         }
+
+        // We send an empty array in case there was only one extra link left and it got deleted
+
+        if(!extraLinks) receivedPost.extraLinks = []
 
         /**
          * Preload will get the provided object from the database and replace the data
