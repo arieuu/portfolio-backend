@@ -1,3 +1,4 @@
+import "dotenv/config";
 import "express-async-errors"; // Library that returns errors as json responses, needed to import first
 import express, { NextFunction, Request, Response } from "express";
 import { router } from "./routes";
@@ -38,6 +39,6 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Listening on port 3000");
 });
